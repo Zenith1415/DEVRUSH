@@ -8,11 +8,7 @@ COPY package.json package-lock.json* bun.lockb* ./
 
 # Install dependencies
 # Using npm as primary, but allowing for bun if lockfile exists
-RUN if [ -f bun.lockb ]; then \
-      npm install -g bun && bun install; \
-    else \
-      npm ci; \
-    fi
+RUN npm ci
 
 # Copy source code
 COPY . .

@@ -123,7 +123,7 @@ const CreateTeamForm = () => {
             <Label className="font-terminal text-xs text-muted-foreground">
               {"> "}track
             </Label>
-            <Select onValueChange={(value) => setValue("track", value as any)}>
+            <Select onValueChange={(value) => setValue("track", value as "GenAI" | "Blockchain" | "Automation" | "OpenInnovation")}>
               <SelectTrigger className="font-terminal bg-secondary/30 border-border">
                 <SelectValue placeholder="Select track" />
               </SelectTrigger>
