@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 60% 9%;
+    --foreground: 220 33% 91%;
+
+    --card: 230 50% 12%;
+    --card-foreground: 220 33% 91%;
+
+    --popover: 230 50% 12%;
+    --popover-foreground: 220 33% 91%;
+
+    --primary: 216 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 230 45% 16%;
+    --secondary-foreground: 220 33% 91%;
+
+    --muted: 230 40% 14%;
+    --muted-foreground: 220 15% 55%;
+
+    --accent: 187 100% 50%;
+    --accent-foreground: 230 60% 9%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 230 40% 20%;
+    --input: 230 40% 18%;
+    --ring: 216 100% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom DevRush tokens */
+    --neon-blue: 216 100% 50%;
+    --neon-cyan: 187 100% 50%;
+    --neon-green: 150 100% 50%;
+    --neon-yellow: 45 100% 50%;
+    --neon-purple: 260 100% 65%;
+    --navy-deep: 230 60% 9%;
+    --navy-mid: 230 50% 14%;
+    --navy-light: 230 40% 20%;
+
+    --glow-primary: 0 0 20px hsl(216 100% 50% / 0.4), 0 0 40px hsl(216 100% 50% / 0.2), 0 0 80px hsl(216 100% 50% / 0.1);
+    --glow-cyan: 0 0 20px hsl(187 100% 50% / 0.4), 0 0 40px hsl(187 100% 50% / 0.2), 0 0 80px hsl(187 100% 50% / 0.1);
+    --glow-green: 0 0 20px hsl(150 100% 50% / 0.4), 0 0 40px hsl(150 100% 50% / 0.2);
+
+    --font-terminal: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --sidebar-background: 230 50% 8%;
+    --sidebar-foreground: 220 33% 91%;
+    --sidebar-primary: 216 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 230 40% 16%;
+    --sidebar-accent-foreground: 220 33% 91%;
+    --sidebar-border: 230 40% 20%;
+    --sidebar-ring: 216 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-terminal);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--navy-deep));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--neon-blue) / 0.5);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--neon-cyan) / 0.7);
+  }
+}
+
+@layer components {
+  .scanline-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(0 0% 0% / 0.03) 2px,
+      hsl(0 0% 0% / 0.03) 4px
+    );
+  }
+
+  .neon-glow {
+    box-shadow: var(--glow-primary);
+  }
+
+  .neon-glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.8), 0 0 20px hsl(var(--neon-cyan) / 0.4), 0 0 40px hsl(var(--neon-cyan) / 0.2);
+  }
+
+  .neon-text-blue {
+    text-shadow: 0 0 10px hsl(var(--neon-blue) / 0.8), 0 0 20px hsl(var(--neon-blue) / 0.4), 0 0 40px hsl(var(--neon-blue) / 0.2);
+  }
+
+  .terminal-window {
+    @apply rounded-lg border border-border bg-card/80 backdrop-blur-md;
+    box-shadow: 0 0 15px hsl(var(--neon-blue) / 0.1), inset 0 1px 0 hsl(var(--foreground) / 0.05);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--neon-blue) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--neon-blue) / 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-cyan)));
+  }
+
+  .gradient-text-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--neon-green)));
+  }
+
+  .glass-card {
+    @apply rounded-xl border border-border/50 bg-card/40 backdrop-blur-xl;
+    box-shadow: 0 8px 32px hsl(var(--navy-deep) / 0.5), inset 0 1px 0 hsl(var(--foreground) / 0.05);
+  }
+
+  .glass-card:hover {
+    border-color: hsl(var(--neon-blue) / 0.3);
+    box-shadow: 0 8px 32px hsl(var(--navy-deep) / 0.5), 0 0 20px hsl(var(--neon-blue) / 0.1), inset 0 1px 0 hsl(var(--foreground) / 0.05);
+  }
+}
+
+@layer utilities {
+  .text-glow-sm {
+    text-shadow: 0 0 8px currentColor;
+  }
+}
